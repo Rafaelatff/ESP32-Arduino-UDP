@@ -34,7 +34,9 @@ Using the UDP Sender / Receiver app (Android), we can check the UDP broadcaps me
 
 ## Receiving UDP Messages
 
-#### Small Recap on Lambda Functions
+<details>
+
+<summary>Small Recap on Lambda Functions</summary>
 
 From the Udemy course [Qt 5 C++ GUI Development For Beginners : The Fundamentals](https://www.udemy.com/course/qt-c-gui-tutorial-for-complete-beginners/), Lesson 20. C++ Lambda Basics: 
 
@@ -106,6 +108,7 @@ auto func = [&](){ // address
 }; // not calling it
 // same as previous example ...
 ```
+</details>
 
 ### Now let's return to the ESP code -  Receiving UDP Messages
 
