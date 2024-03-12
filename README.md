@@ -31,9 +31,18 @@ void loop(){
 
 Using the UDP Sender / Receiver app (Android), we can check the UDP broadcaps messages send from the ESP32:
 
-![image](https://github.com/Rafaelatff/ESP32-Arduino-UDP/assets/58916022/0abd6dfa-2613-4824-b55f-ca7d6394d061)
+<img src="https://github.com/Rafaelatff/ESP32-Arduino-UDP/assets/58916022/0abd6dfa-2613-4824-b55f-ca7d6394d061" alt="Descrição da imagem" width="358" height="800">
 
 ## Receiving UDP Messages
+
+Inside then `setup(){` -> `if(udp.listen(2000)){`, we call the `udp.onPacket(){`. 
+This function is used to register a "callback" that will be called when a UDP packet is received.
+
+PAREI AQUI
+
+```cpp
+
+```
 
 
 ## Bibliography
