@@ -114,18 +114,54 @@ auto func = [&](){ // address
 
 First I declare the class type `AsyncUDP udp;`. 
 
-
-
-Inside then `setup(){` -> `if(udp.listen(2000)){`, we call the `udp.onPacket(){`. 
+Inside then `setup()` -> `if(udp.listen(2000))`, we call the `udp.onPacket(` object and we pass the Lambda function -> `[](AsyncUDPPacket packet){ /* function body */ } );`
 This function is used to register a "callback" that will be called when a UDP packet is received.
 
-PAREI AQUI
+The `/* function body */` its explanation is presented next:
 
 ```cpp
+// malloc() -> memory allocation -> function that allows C to **allocate memory** dynamically from the heap
+      char* tmpStr = (char*) malloc(packet.length() + 1); // pointer named "temporary string", receives the address (typecasted to char), with size of packet.length +1 
+      // memcpy (destination, source, size)
+      memcpy(tmpStr, packet.data(), packet.length()); 
+      tmpStr[packet.length()] = '\0'; // ensure null termination        
+      
+      // String  menssage = (char*)(packet.data());      
+      String message = String(tmpStr);
+      free(tmpStr); // Free our memory
+      Serial.println(message); // Print our message
+      if(message == "on"){
+        digitalWrite(blueLED, HIGH); // Turn on blueLED
+      }
+      if(message == "off"){
+        digitalWrite(blueLED, LOW); // Turn off blueLED
+      }
+      if(message == "consulta"){
+        if(digitalRead(blueLED == HIGH)){packet.print("Now blueLED is HIGH");} // not working now
+        if(digitalRead(blueLED == LOW)) {packet.print("Now blueLED is LOW");}
+      }
 
+      // Reply to the client
+      Serial.print("Got ");
+      Serial.print(packet.length());
+      Serial.println(" bytes of data");
 ```
+As results: 
+
+![WhatsApp Video 2024-03-12 at 21 15 48](https://github.com/Rafaelatff/ESP32-Arduino-UDP/assets/58916022/70beec25-1e25-4158-91d3-d12b5b51213d)
+
+And the terminal:
+
+![image](https://github.com/Rafaelatff/ESP32-Arduino-UDP/assets/58916022/133a85e7-39ca-4a2d-b15d-c6319d79497c)
+
+I also used ncat and send a few texts to text, such as:
+
+![image](https://github.com/Rafaelatff/ESP32-Arduino-UDP/assets/58916022/df2ee01f-4cc2-4c01-bfae-46077b734ec1)
+
 
 
 ## Bibliography
 
 * [UDP Texting](https://community.appinventor.mit.edu/t/esp32-with-udp-send-receive-text-chat-mobile-mobile-udp-testing-extension-udp-by-ullis-ulrich-bien/72664/2).
+* [malloc()](https://youtu.be/SuBch2MZpZM).
+* [memcpy()](https://youtu.be/yoa_mMmvlMc).
