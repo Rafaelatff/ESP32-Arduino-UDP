@@ -8,7 +8,7 @@ const byte blueLED = 2;  // GPIO2
 
 //WiFI
 const char* ssid = "Skynet";
-const char* senha = "Mudei951!";
+const char* senha = "xxxx";
 
 //UDO
 AsyncUDP udp;
